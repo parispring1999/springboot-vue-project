@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wms.common.QueryPageParam;
+import com.wms.common.Result;
 import com.wms.entity.User;
 import com.wms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class UserController {
     }
     //入参封装
     @PostMapping("/listpage")
-    public List<User> listPage(@RequestBody QueryPageParam query){
+    public Result listPage(@RequestBody QueryPageParam query){
         //System.out.println(query);
         //System.out.println(query.getPageNum());
         //System.out.println(query.getPageSize());
@@ -72,9 +73,9 @@ public class UserController {
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
         lambdaQueryWrapper.like(User::getName,param.get("name"));
         IPage result=userService.page(page,lambdaQueryWrapper);
-        System.out.println(result.getTotal());
+        //System.out.println(result.getTotal());
         //System.out.println(result.getPages());
         //System.out.println(result.getRecords());
-        return result.getRecords();
+        return Result.suc(result.getRecords(), result.getTotal());
     }
 }
