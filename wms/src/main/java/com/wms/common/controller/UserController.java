@@ -1,4 +1,4 @@
-package com.wms.controller;
+package com.wms.common.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
