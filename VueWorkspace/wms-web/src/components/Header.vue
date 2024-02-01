@@ -1,7 +1,7 @@
 <template>
 <div style="display:flex;line-height:60px">
     <div>
-    <i class="el-icon-s-fold" style="font-size: 20px;line-height:60px"></i>
+    <i class="el-icon-s-fold" style="font-size: 20px;line-height:60px" @click="collapse"></i>
     </div>
     <div style="flex:1;text-align: center;font-size: 33px;line-height:60px">
         仓库管理系统
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { Collapse } from 'element-ui';
+
     export default {
     name:'Header',
     methods:{
@@ -26,6 +28,9 @@
         },
         logout(){
             alert('logout')
+        },
+        collapse(){
+          this.$emit('doCollapse')
         }
     }
     };
