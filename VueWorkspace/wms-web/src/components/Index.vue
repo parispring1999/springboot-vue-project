@@ -43,13 +43,13 @@
     },
     methods:{
       doCollapse(){
-        alert("111")
+        alert(this.aside_width)
         this.isCollapse=!this.isCollapse
         if(!this.isCollapse){//展开
-          aside_width='200px'
+          this.aside_width='200px'
         }
         else{//收起
-          aside_width='64px'
+          this.aside_width='64px'
         }
       }
     }

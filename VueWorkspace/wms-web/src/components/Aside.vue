@@ -20,9 +20,12 @@
     name:'Aside',
     data(){
       return {
-        isCollapse:false
+        //isCollapse:false
       }
-    }
+    },
+    props:{
+        isCollapse:Boolean
+      }
     };
   </script>
 

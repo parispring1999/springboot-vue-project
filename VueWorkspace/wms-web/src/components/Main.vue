@@ -10,6 +10,8 @@
 </template>
 
 <script>
+
+
     export default {
     name:'Aside',
     data() {
@@ -19,8 +21,18 @@
       address: '上海市普陀区金沙江路 1518 弄'
     };
     return {
-      tableData: Array(20).fill(item)
+      tableData: Array(10).fill(item)
     }
+    },
+    methods:{
+      loadGet(){
+        this.$axios.get('http://localhost:8081/user/list').then(res=>res.data).then(res=>{
+          alert(res)
+        })
+      }
+    },
+    beforeMount(){
+      this.loadGet()
     }
     };
 </script>

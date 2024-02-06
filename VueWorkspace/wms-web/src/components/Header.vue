@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { Collapse } from 'element-ui';
+
 
     export default {
     name:'Header',

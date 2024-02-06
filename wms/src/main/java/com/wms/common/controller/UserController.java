@@ -21,6 +21,7 @@ import java.util.List;
  * @author wms
  * @since 2024-01-07
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
