@@ -43,7 +43,7 @@
     },
     methods:{
       doCollapse(){
-        alert(this.aside_width)
+        //alert(this.aside_width)
         this.isCollapse=!this.isCollapse
         if(!this.isCollapse){//展开
           this.aside_width='200px'
