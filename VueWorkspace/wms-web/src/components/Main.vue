@@ -7,6 +7,9 @@
     <el-table-column prop="age" label="年龄" width="160">
     </el-table-column>
     <el-table-column prop="sex" label="性别" width="160">
+      <template slot-scope="scope">
+        <el-tag :type="scope.row.sex===1?'primary':'success'" disable-transitions>{{ scope.row.sex===1?'男':'女' }}</el-tag>
+      </template>
     </el-table-column>
     <el-table-column prop="roleId" label="角色" width="160">
     </el-table-column>
