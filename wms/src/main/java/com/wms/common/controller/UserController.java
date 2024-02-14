@@ -2,18 +2,16 @@ package com.wms.common.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wms.common.QueryPageParam;
 import com.wms.common.Result;
 import com.wms.entity.User;
 import com.wms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
 /**
  * <p>
  *  前端控制器
@@ -35,8 +33,8 @@ public class UserController {
 
     //增
     @PostMapping("/save")
-    public boolean save(@RequestBody User user){
-        return userService.save(user);
+    public Result save(@RequestBody User user){
+        return userService.save(user)?Result.suc():Result.fail();
     }
     //改
     @PostMapping("/mod")
@@ -55,15 +53,18 @@ public class UserController {
     }
     //查
     @PostMapping("/listp")
-    public List<User> listP(@RequestBody User user){
+    public Result listP(@RequestBody User user){
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper();
         if(StringUtils.isNotBlank(user.getName())) {
             lambdaQueryWrapper.like(User::getName, user.getName());
         }
-        return userService.list(lambdaQueryWrapper);
+        if(Objects.nonNull(user.getSex())) {
+            lambdaQueryWrapper.eq(User::getSex, user.getSex());
+        }
+        return Result.suc(userService.list(lambdaQueryWrapper));
     }
     //入参封装
-    @PostMapping("/listpage")
+    /*@PostMapping("/listpage")
     public Result listPage(@RequestBody QueryPageParam query){
         //System.out.println(query);
         //System.out.println(query.getPageNum());
@@ -81,5 +82,5 @@ public class UserController {
         //System.out.println(result.getPages());
         //System.out.println(result.getRecords());
         return Result.suc(result.getRecords(), result.getTotal());
-    }
+    }*/
 }
