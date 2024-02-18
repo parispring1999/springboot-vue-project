@@ -43,13 +43,13 @@ public class UserController {
     }
     //增或改
     @PostMapping("/saveormod")
-    public boolean saveOrMod(@RequestBody User user){
-        return userService.saveOrUpdate(user);
+    public Result saveOrMod(@RequestBody User user){
+        return userService.saveOrUpdate(user)?Result.suc():Result.fail();
     }
     //删
     @GetMapping("/delete")
-    public boolean delete(Integer id){
-        return userService.removeById(id);
+    public Result delete(@RequestParam String id){
+        return userService.removeById(id)?Result.suc():Result.fail();
     }
     //查
     @PostMapping("/listp")
@@ -62,6 +62,12 @@ public class UserController {
             lambdaQueryWrapper.eq(User::getSex, user.getSex());
         }
         return Result.suc(userService.list(lambdaQueryWrapper));
+    }
+    //登录
+    @PostMapping("/login")
+    public Result login(@RequestBody User user){
+        List list=userService.lambdaQuery().eq(User::getNo,user.getNo()).eq(User::getPassword,user.getPassword()).list();
+        return list.size()>0?Result.suc(list.get(0)):Result.fail();
     }
     //入参封装
     /*@PostMapping("/listpage")

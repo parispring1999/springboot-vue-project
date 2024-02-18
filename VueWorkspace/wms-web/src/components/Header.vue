@@ -7,7 +7,7 @@
         仓库管理系统
     </div>
   <el-dropdown>
-    <span>王小虎</span>
+    <span>{{ user.name }}</span>
     <i class="el-icon-arrow-down" style="margin-left: 5px"></i>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item @click.native="toUser">个人中心</el-dropdown-item>
@@ -22,12 +22,18 @@
 
     export default {
     name:'Header',
+    data(){
+      return{user:JSON.parse(sessionStorage.getItem('CurUser'))}
+    },
     methods:{
         toUser(){
-            alert('toUser')
+            //alert('toUser')
+            this.$router.push("/home")
         },
         logout(){
-            alert('logout')
+            //alert('logout')
+            this.$router.push("/")
+            sessionStorage.clear()
         },
         collapse(){
           this.$emit('doCollapse')

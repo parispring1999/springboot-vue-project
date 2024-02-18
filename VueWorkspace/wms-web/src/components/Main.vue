@@ -26,37 +26,41 @@
       </el-table-column>
       <el-table-column prop="phone" label="电话" width="160"></el-table-column>
       <el-table-column prop="operate" label="操作">
-        <el-button size="small" type=“success”>编辑</el-button>
-        <el-button size="small" type=“danger”>删除</el-button>
+        <template slot-scope="scope"> 
+          <el-button size="small" type=“success” @click="mod(scope.row)">编辑</el-button>
+          <el-popconfirm title="确认吗？" @confirm="del(scope.row.id)" style="margin-left: 5px;">
+            <el-button slot="reference" size="small" type=“danger”>删除</el-button>
+          </el-popconfirm>
+        </template>
       </el-table-column>
     </el-table>
     <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
       <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="账号">
+        <el-form-item prop="no" label="账号">
           <el-input v-model="form.no"></el-input>
         </el-form-item>
-        <el-form-item label="名字">
+        <el-form-item prop="name" label="名字">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item prop="password" label="密码">
           <el-input v-model="form.password"></el-input>
         </el-form-item>
-        <el-form-item label="年龄">
+        <el-form-item prop="age" label="年龄">
           <el-input v-model="form.age"></el-input>
         </el-form-item>
-        <el-form-item label="性别">
+        <el-form-item prop="sex" label="性别">
           <el-radio-group v-model="form.sex">
             <el-radio label="1">男</el-radio>
             <el-radio label="0">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="电话">
+        <el-form-item prop="phone" label="电话">
           <el-input v-model="form.phone"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="centerDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="save">确定</el-button>
+        <el-button type="primary" @click="saveormod">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -73,30 +77,64 @@
         sexs:[{value:'1',label:'男'},{value:'0',label:'女'}],
         centerDialogVisible:false,
         form:{
+          id:'',
           no:'',
           name:'',
           password:'',
           age:'',
           phone:'',
           sex:'0',
+          roleId:''
         }
       }
     },
     methods:{
+      del(id){
+        //alert("del")
+        this.$axios.get('http://localhost:8081/user/delete?id='+id).then(res=>res.data).then(res=>{
+          if(res.code==200){
+            this.$message({message:'操作成功',type:'success'})
+            this.loadPost()
+          }
+          else{
+            this.$message({message:'操作失败',type:'error'})
+          }
+        })
+      },
+      mod(row){
+        this.centerDialogVisible=true
+        this.$nextTick(()=>{
+          //赋值到表单
+          this.form.id=row.id
+          this.form.no=row.no
+          this.form.name=row.name
+          this.form.password=row.password
+          this.form.age=row.age+''
+          this.form.sex=row.sex+''
+          this.form.phone=row.phone
+          this.form.roleId=row.roleId
+        })
+      },
       add(){
         this.centerDialogVisible=true
+        this.$nextTick(()=>{
+          //初始化表单
+          this.$refs.form.resetFields()
+          this.form.id=''
+          this.form.roleId=''
+        })
       },
-      save(){
-        this.$axios.post('http://localhost:8081/user/save',this.form).then(res=>res.data).then(res=>{
+      saveormod(){
+        this.$axios.post('http://localhost:8081/user/saveormod',this.form).then(res=>res.data).then(res=>{
           if(res.code==200){
             //alert("添加成功")
-            this.$message({message:'添加成功',type:'success'})
+            this.$message({message:'操作成功',type:'success'})
             this.centerDialogVisible=false
             this.loadPost()
           }
           else{
             //alert("添加失败")
-            this.$message({message:'添加失败',type:'error'})
+            this.$message({message:'操作失败',type:'error'})
           }
         })
       },
