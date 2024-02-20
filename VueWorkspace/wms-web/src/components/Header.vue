@@ -38,6 +38,9 @@
         collapse(){
           this.$emit('doCollapse')
         }
+    },
+    created(){
+      this.$router.push("/main")
     }
     };
   </script>

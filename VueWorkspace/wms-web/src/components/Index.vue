@@ -10,7 +10,8 @@
       </el-header>
       
       <el-main>
-        <Main></Main>
+        <!--<Main></Main>-->
+        <router-view/>
       </el-main>
     </el-container>
   </el-container>
@@ -31,10 +32,10 @@
   <script>
     import Aside from "./Aside.vue"
     import Header from "./Header.vue"
-    import Main from "./Main.vue"
+    //import Main from "./Main.vue"
     export default {
     name:'Index',
-    components:{Aside,Header,Main},
+    components:{Aside,Header},
     data(){
       return {
         isCollapse:false,

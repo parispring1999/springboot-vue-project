@@ -10,16 +10,32 @@ const routes=[
         path:'/index',
         name:'index',
         component:()=>import('../components/Index'),
-        /*children:[
+        children:[
             {
-                path:'/home',
-                name:'home',
+                path:'/main',
+                name:'main',
                 meta:{
                     title:'首页'
                 },
-                component:()=>import('../components/MyHome')
+                component:()=>import('../components/Main')
+            },
+            {
+                path:'/admin',
+                name:'admin',
+                meta:{
+                    title:'管理员管理'
+                },
+                component:()=>import('../components/AdminManage')
+            },
+            {
+                path:'/user',
+                name:'user',
+                meta:{
+                    title:'用户管理'
+                },
+                component:()=>import('../components/UserManage')
             }
-        ]*/
+        ]
     },
     {
         path:'/home',
@@ -34,5 +50,9 @@ const router=new VueRouter(
         routes
     }
 )
+const VueRouterPush=VueRouter.prototype.push
+VueRouter.prototype.push=function push(to){
+    return VueRouterPush.call(this,to).catch(err=>err)
+}
 
 export default router
