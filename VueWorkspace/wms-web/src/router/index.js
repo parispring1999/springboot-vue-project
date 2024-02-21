@@ -19,7 +19,7 @@ const routes=[
                 },
                 component:()=>import('../components/Main')
             },
-            {
+            /*{
                 path:'/admin',
                 name:'admin',
                 meta:{
@@ -34,7 +34,7 @@ const routes=[
                     title:'用户管理'
                 },
                 component:()=>import('../components/UserManage')
-            }
+            }*/
         ]
     },
     {
@@ -43,7 +43,6 @@ const routes=[
         component:()=>import('../components/MyHome')
     }
 ]
-
 const router=new VueRouter(
     {
         mode:'history',

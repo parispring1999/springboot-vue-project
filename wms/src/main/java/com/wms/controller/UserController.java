@@ -1,14 +1,17 @@
-package com.wms.common.controller;
+package com.wms.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wms.common.Result;
+import com.wms.entity.Menu;
 import com.wms.entity.User;
 import com.wms.service.UserService;
+import com.wms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +29,9 @@ import java.util.Objects;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private MenuService menuService;
+
     @GetMapping("/list")
     public List<User> list(){
         return userService.list();
@@ -67,7 +73,15 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestBody User user){
         List list=userService.lambdaQuery().eq(User::getNo,user.getNo()).eq(User::getPassword,user.getPassword()).list();
-        return list.size()>0?Result.suc(list.get(0)):Result.fail();
+        if(list.size()>0) {
+            User user1=(User)list.get(0);
+            List menuList = menuService.lambdaQuery().like(Menu::getMenuright, user1.getRoleId()).list();
+            HashMap res=new HashMap();
+            res.put("user",user1);
+            res.put("menu",menuList);
+            return Result.suc(res);
+        }
+        return Result.fail();
     }
     //入参封装
     /*@PostMapping("/listpage")

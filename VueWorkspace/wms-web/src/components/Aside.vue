@@ -30,7 +30,7 @@
     data(){
       return {
         //isCollapse:false
-        menu:[
+        /*menu:[
           {
             menuclick:'admin',
             menuname:'管理员管理',
@@ -41,7 +41,14 @@
             menuname:'用户管理',
             menuicon:'el-icon-user-solid'
           }
-        ]
+        ]*/
+      }
+    },
+    computed:{
+      "menu":{
+        get(){
+          return this.$store.state.menu
+        }
       }
     },
     props:{
