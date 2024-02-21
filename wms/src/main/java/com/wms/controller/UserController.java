@@ -67,6 +67,9 @@ public class UserController {
         if(Objects.nonNull(user.getSex())) {
             lambdaQueryWrapper.eq(User::getSex, user.getSex());
         }
+        if(Objects.nonNull(user.getRoleId())) {
+            lambdaQueryWrapper.eq(User::getRoleId, user.getRoleId());
+        }
         return Result.suc(userService.list(lambdaQueryWrapper));
     }
     //登录

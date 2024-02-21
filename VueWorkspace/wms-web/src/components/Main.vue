@@ -68,7 +68,7 @@
 
 <script>
   export default {
-    name:'Aside',
+    name:'Main',
     data() {
       return {
         tableData: [],

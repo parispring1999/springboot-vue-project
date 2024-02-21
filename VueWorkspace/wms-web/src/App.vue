@@ -12,6 +12,23 @@ export default {
   name: 'App',
   components: {
     //Index
+  },
+  data(){
+    return{
+      user:JSON.parse(sessionStorage.getItem('CurUser'))
+    }
+  },
+  watch:{
+    '$store.state.menu':{
+      handler(val,old){
+        //console.log(val)
+        //console.log(val,old)
+        if(!old&&this.user&&this.user.no){
+          this.$store.commit("setMenu",val)
+        }
+      },
+      immediate:true
+    }
   }
 }
 </script>
