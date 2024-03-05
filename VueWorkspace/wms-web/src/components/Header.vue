@@ -4,7 +4,7 @@
     <i class="el-icon-s-fold" style="font-size: 20px;line-height:60px" @click="collapse"></i>
     </div>
     <div style="flex:1;text-align: center;font-size: 33px;line-height:60px">
-        仓库管理系统
+        网络攻击反制平台
     </div>
   <el-dropdown>
     <span>{{ user.name }}</span>

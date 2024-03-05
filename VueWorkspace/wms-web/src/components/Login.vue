@@ -51,12 +51,12 @@
                     if (valid) { //valid成功为true，失败为false
                         //去后台验证用户名密码
                         this.$axios.post('http://localhost:8081/user/login',this.loginForm).then(res=>res.data).then(res=>{
-                            console.log(res)
+                            //console.log(res)
                             if(res.code==200){
                                 //存储
                                 sessionStorage.setItem("CurUser",JSON.stringify(res.data.user))
 
-                                //console.log(res.data.menu)
+                                console.log(res.data.menu)
                                 this.$store.commit("setMenu",res.data.menu)
                                 //跳转到主页
                                 this.$router.replace('/index');

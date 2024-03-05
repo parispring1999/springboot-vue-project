@@ -121,7 +121,7 @@
             //初始化表单
             this.$refs.form.resetFields()
             this.form.id=''
-            this.form.roleId=''
+            this.form.roleId='2'
           })
         },
         saveormod(){

@@ -84,7 +84,7 @@
             age:'',
             phone:'',
             sex:'0',
-            roleId:'1'
+            roleId:''
           }
         }
       },
@@ -121,7 +121,7 @@
             //初始化表单
             this.$refs.form.resetFields()
             this.form.id=''
-            this.form.roleId=''
+            this.form.roleId='2'
           })
         },
         saveormod(){

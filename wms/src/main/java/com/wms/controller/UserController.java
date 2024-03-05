@@ -106,4 +106,20 @@ public class UserController {
         //System.out.println(result.getRecords());
         return Result.suc(result.getRecords(), result.getTotal());
     }*/
+    @GetMapping("/awvs")
+    public Result awvs(){
+        return Result.suc();
+    }
+    @GetMapping("/as")
+    public Result as(){
+        return Result.suc();
+    }
+    @GetMapping("/cs")
+    public Result cs(){
+        return Result.suc();
+    }
+    @GetMapping("/awa")
+    public Result awa(){
+        return Result.suc();
+    }
 }
