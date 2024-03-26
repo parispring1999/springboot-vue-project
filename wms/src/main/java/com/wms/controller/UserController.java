@@ -3,11 +3,12 @@ package com.wms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.wms.common.Csachieve;
 import com.wms.common.Result;
 import com.wms.entity.Menu;
 import com.wms.entity.User;
-import com.wms.service.UserService;
 import com.wms.service.MenuService;
+import com.wms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,6 +117,7 @@ public class UserController {
     }
     @GetMapping("/cs")
     public Result cs(){
+        Csachieve.main();
         return Result.suc();
     }
     @GetMapping("/awa")
